@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        setTimeout(() => {
+            console.log("...我是第一层...")
+            setTimeout(() => {
+                console.log("...我是第二层...")
+                setTimeout(() => {
+                    console.log("...我是第三层...")
+                    setTimeout(() => {
+                        console.log("...我是第四层...")
+                    }, 2000);
+                }, 1000);
+            }, 3000);
+        }, 2000);
+        **/
+
+        // 1.创建一个promise对象
+        const promise = new Promise((resolve,reject)=>{
+            const random = Math.random()
+            console.log(random)
+
+            setTimeout(() => {
+                if(random > 0.5){//成功
+                    resolve({status:0,message:'登录成功'})
+                }else{
+                    reject({status:1,message:'登录失败'})
+                }
+            }, 2000);
+        })
+
+        // 拿到结果
+        /**
+        then的参数，第一个是必须的，成功的结果，第二个参数是可选的
+        */
+        // promise.then(result=>{
+        //     console.log(result)
+        // },err=>{
+        //     console.log(err)
+        // })
+
+        promise.then(result=>{
+            console.log(result)
+        }).catch(err=>{
+            console.log(err)
+        })
+        
+    </script>
+</body>
+</html>
